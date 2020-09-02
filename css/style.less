@@ -1,0 +1,161 @@
+
+@import "./mixings.less";
+
+html{
+    font-size: 14px;
+}
+
+body{
+    color: red;
+    background-color: white;
+}
+
+
+// colors
+@blue:#2a2a88;
+@backgorundColorMenu: #ffffff;
+@backgroundColorSelectionButton: #2a2a88;
+@lightGray:#bdbbbb;
+@white:#ffffff;
+@lightTrasparentGreen: #79fdd170;
+@trasparent: #00000000;
+
+// variables for diamentions
+@paddinsButtonInputs: 1rem;
+
+
+// timing parameters
+@transitions: 0.45s;
+
+
+
+.select-component{
+    .display-flex(start, center, row);
+    position: relative;
+    border: none;
+    background-color:@backgroundColorSelectionButton;
+    color: white;
+    width: 100%;
+    height: 3rem;
+    padding:@paddinsButtonInputs;
+    min-width: 2rem;
+    transition:  all  @transitions ease-in-out;
+
+    &:hover{
+        cursor: pointer;
+    }
+
+    &:focus{
+        outline: none;
+        background-color: @lightTrasparentGreen;
+        .select-text-display, .fa-angle-down,
+        .fa-angle-up{
+            color: @blue !important;
+            font-weight: bold;
+        }
+    }
+
+    .fa-angle-down,
+    .fa-angle-up{
+        .position-element(absolute, @paddinsButtonInputs, unset,unset, unset);
+        font-size: 1rem; 
+        transition:  all  @transitions ease-in-out;
+    }
+
+
+    .select-text-display{
+        font-size: 1rem; 
+        transition:  all  @transitions ease-in-out;
+    }
+
+    .select-menu{
+        .position-element(absolute,0, unset,100%, unset);
+        display: none;
+        width: calc(100% - 2 * 1rem);
+        list-style: none;
+        margin: 0;
+        padding:1rem;
+        background-color: @backgorundColorMenu;
+        box-shadow: 0 0 0.2rem @lightGray;
+
+        &.active-select-menu{
+            display: block;
+        }
+
+        .search-menu-item{
+            .display-flex(start,center,row);
+            width: calc(100% - 2 * 0.2rem);
+            padding: 0.2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid @lightGray;
+
+
+            &:focus-within{
+                color: @blue;
+                border-bottom: 1px solid @blue;
+            }
+
+
+            .input-search{
+                padding: @paddinsButtonInputs;
+                font-size: 1rem;
+                color: @lightGray;
+                border: none;
+                width: 100%;
+
+                &:focus{
+                    outline: none;
+                }
+            }
+
+            .fa-search{
+                font-size: 1rem;
+                color: @lightGray;
+            }
+        }
+
+        .select-menu-item{
+            width: calc(100% - 2 * 0.2rem);
+            padding: 0.2rem;
+
+            .select-menu-item-button{
+                .display-flex(start, center, row);
+                width: 100%;
+                padding: @paddinsButtonInputs;
+                border: none;
+                border-radius: 0.3rem;
+                color: @lightGray;
+                background-color: @trasparent;
+                box-shadow: 0 0 0.2rem @lightGray;
+                transition:  all  @transitions ease-in-out;
+                
+                &:focus{
+                    outline: none;
+                    box-shadow: 0 0 0.2rem @lightGray;
+                    background-color: @lightTrasparentGreen;
+                }
+
+                &:hover{
+                    cursor: pointer;
+                    background-color: @lightTrasparentGreen;
+                }
+
+                &.active-item{
+                    background-color: @backgroundColorSelectionButton;
+                    color: @white;
+                    
+                    &:focus{
+                        outline: none;
+                        box-shadow: 0 0 0.2rem @lightGray;
+                        background-color: @lightTrasparentGreen;
+                    }
+                }
+            }
+        
+        }
+
+
+    }
+}
+
+
