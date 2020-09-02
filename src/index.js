@@ -15,9 +15,14 @@ function component(optionsObject) {
     const liSearchElement = createHtmlElement('li', "search-menu-item", "search-menu-item", null, null, null, null, null);
     const inputSearchDom = document.querySelectorAll("#input-search");
     const inputSearch = createHtmlElement('input', `input-search ${inputSearchDom.length}`, "input-search", null, null, null, "Search", null);
+    inputSearch.addEventListener("input", (event) => {
+        handleSearchInput(event);
+    })
     const searchIcon = createHtmlElement('i', null, "fas fa-search", null, null, null, null, null);
+    const errorSearch = createHtmlElement('span', null, "error-search", "Search Not Found", null, null, null, null);
     liSearchElement.appendChild(searchIcon);
     liSearchElement.appendChild(inputSearch);
+    liSearchElement.appendChild(errorSearch);
     selectMenuList.appendChild(liSearchElement);
     addOptionsToSelectionElement(optionsObject, selectMenuList)
     selectComponent.appendChild(textSelectComponent);
@@ -26,7 +31,6 @@ function component(optionsObject) {
     selectComponent.addEventListener("click", (event) => {
         handleSelectCompnentClick(event);
     });
-
     return selectComponent;
 }
 
@@ -90,6 +94,29 @@ function handleClickSelectionItem(event) {
     openCloseSelecMenu(selectMenu, selectComponent);
     //  console.log(`selectItem:${selectionItem.className}`);
 }
+
+
+function handleSearchInput(event) {
+    const searchInput = event.target;
+    const filter = searchInput.value;
+    const selectMenu = searchInput.parentElement.parentElement;
+    const selectMenuItemLabels = selectMenu.querySelectorAll(".select-menu-item-label");
+    var counter = 0;
+    selectMenuItemLabels.forEach((e, i) => {
+        const text = e.innerText || e.innerHTML;
+        if (text.includes(filter)) { e.parentElement.parentElement.style.display = ""; counter++; } else { e.parentElement.parentElement.style.display = "none"; counter--; }
+    });
+    const isVisible = (counter - selectMenuItemLabels.length) == 0;
+    const errormessage = searchInput.parentElement.querySelector(".error-search");
+    console.log(errormessage.className);
+    console.log(isVisible);
+    seVisibilityErrorSearch(isVisible, errormessage);
+}
+
+function seVisibilityErrorSearch(isVisible, element) {
+    isVisible ? element.classList.add("active-error") : element.classList.remove("active-error");
+}
+
 
 
 function createHtmlElement(type, id, className, innerText, innerHTML, value, placeholder, disabled) {
