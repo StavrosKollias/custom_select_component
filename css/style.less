@@ -33,155 +33,169 @@ body{
 @tablet: 900px;
 @mobile: 600px;
 
-
-.select-component{
-    .display-flex(start, center, row);
-    position: relative;
-    border: none;
-    background-color:@backgroundColorSelectionButton;
-    color: @white;
+.ui-select-container{
     width: 100%;
-    height: 3rem;
-    padding:@paddinsButtonInputs;
-    min-width: 2rem;
-    transition:  all  @transitions ease-in-out;
 
-    &:hover{
-        cursor: pointer;
-    }
-
-    &:focus{
-        outline: none;
-        box-shadow: 0 0 0.2rem @lightGray;
-        .select-text-display, .fa-angle-down,
-        .fa-angle-up{
-            font-weight: bold;
-        }
-    }
-
-    .fa-angle-down,
-    .fa-angle-up{
-        .position-element(absolute, @paddinsButtonInputs, unset,unset, unset);
-        font-size: 1rem; 
-        transition:  all  @transitions ease-in-out;
-    }
-
-
-    .select-text-display{
-        font-size: 1rem; 
-        transition:  all  @transitions ease-in-out;
-    }
-
-    .select-menu{
-        .position-element(fixed,0, 0,0, 0);
+    [data-role="ui-select-custom"]{
         display: none;
-        width: calc(100% - 2 * 1rem);
-        list-style: none;
-        margin: 0;
-        padding:1rem;
-        background-color: @backgorundColorMenu;
-        box-shadow: 0 0 0.2rem @lightGray;
-        height: calc( 100vh - 2 * 1rem);
-        overflow-y: auto;
-        z-index: 10;
+    }
 
-        @media only screen and(min-width: @tablet){
-            .position-element(absolute,0, unset,100%, unset);
-            max-height: calc(20rem - 2 * 1rem);
+
+    .select-component{
+        .display-flex(start, center, row);
+        position: relative;
+        border: none;
+        background-color:@backgroundColorSelectionButton;
+        color: @white;
+        width: 100%;
+        height: 3rem;
+        padding:@paddinsButtonInputs;
+        min-width: 2rem;
+        transition:  all  @transitions ease-in-out;
+
+        &:hover{
+            cursor: pointer;
+        }
+
+        &:focus,&:focus-within{
+            outline: none;
+            box-shadow: 0 0 0.2rem @lightGray;
+            .select-text-display, .fa-angle-down,
+            .fa-angle-up{
+                font-weight: bold;
+            }
+        }
+
+        .fa-angle-down,
+        .fa-angle-up{
+            .position-element(absolute, @paddinsButtonInputs, unset,unset, unset);
+            font-size: 1rem; 
         }
 
 
-        &.active-select-menu{
-            display: block;
+        .select-text-display{
+            font-size: 1rem; 
         }
 
-        .search-menu-item{
-            .display-flex(start,center,row);
-            position: relative;
-            width: calc(100% - 2 * 0.2rem);
-            padding: 0.2rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid @lightGray;
+        .select-menu{
+            .position-element(fixed,0, 0,0, 0);
+            display: none;
+            width: calc(100% - 2 * 1rem);
+            list-style: none;
+            margin: 0;
+            padding:1rem;
+            background-color: @backgorundColorMenu;
+            box-shadow: 0 0 0.2rem @lightGray;
+            height: calc( 100vh - 2 * 1rem);
+            overflow-y: auto;
+            z-index: 10;
 
-
-            &:focus-within{
-                color: @blue;
-                border-bottom: 1px solid @blue;
+            @media only screen and(min-width: @tablet){
+                .position-element(absolute,0, unset,100%, unset);
+                max-height: calc(20rem - 2 * 1rem);
             }
 
 
-            .input-search{
-                padding: @paddinsButtonInputs;
-                font-size: 1rem;
-                color: @lightGray;
-                border: none;
-                width: 100%;
+            &.active-select-menu{
+                display: block;
+            }
 
-                &:focus{
-                    outline: none;
+            .search-menu-item{
+                .display-flex(start,center,row);
+                position: relative;
+                width: calc(100% - 2 * 0.2rem);
+                padding: 0.2rem;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid @lightGray;
+
+                &.error{
+                    border-bottom: 1px solid @red ; 
+                }
+
+                &.error:focus-within{
+                    border-bottom: 1px solid @red ; 
+                }
+
+                &:focus-within{
+                    color: @blue;
+                    border-bottom: 1px solid @blue;
+                }
+
+
+                .input-search{
+                    padding: @paddinsButtonInputs;
+                    font-size: 1rem;
+                    color: @lightGray;
+                    border: none;
+                    width: 100%;
+
+                    &:focus{
+                        outline: none;
+                    }
+
+                   
+                }
+
+                .fa-search{
+                    font-size: 1rem;
+                    color: @lightGray;
+                }
+
+                .error-search{
+                    .position-element(absolute,50%, unset,unset, -3rem);
+                    opacity: 0;
+                    color: @red;
+                    transform: translateY(0rem);
+                    transition:  all  @transitions ease-in-out;
+
+                    &.error{
+                        opacity: 1;
+                        transform: translateY(-3rem);
+                    }
                 }
             }
 
-            .fa-search{
-                font-size: 1rem;
-                color: @lightGray;
-            }
+            .select-menu-item{
+                width: calc(100% - 2 * 0.2rem);
+                padding: 0.2rem;
 
-            .error-search{
-                .position-element(absolute,50%, unset,unset, -1rem);
-                opacity: 0;
-                color: @red;
-                transform: translateY(0rem);
-                transition:  all  @transitions ease-in-out;
-
-                &.active-error{
-                    opacity: 1;
-                    transform: translateY(-1rem);
-                }
-            }
-        }
-
-        .select-menu-item{
-            width: calc(100% - 2 * 0.2rem);
-            padding: 0.2rem;
-
-            .select-menu-item-button{
-                .display-flex(start, center, row);
-                width: 100%;
-                padding: @paddinsButtonInputs;
-                border: none;
-                border-radius: 0.3rem;
-                color: @lightGray;
-                background-color: @trasparent;
-                box-shadow: 0 0 0.2rem @lightGray;
-                transition:  all  @transitions ease-in-out;
-                
-                &:focus{
-                    outline: none;
+                .select-menu-item-button{
+                    .display-flex(start, center, row);
+                    width: 100%;
+                    padding: @paddinsButtonInputs;
+                    border: none;
+                    border-radius: 0.3rem;
+                    color: @lightGray;
+                    background-color: @trasparent;
                     box-shadow: 0 0 0.2rem @lightGray;
-                    background-color: @lightTrasparentGreen;
-                }
-
-                &:hover{
-                    cursor: pointer;
-                    background-color: @lightTrasparentGreen;
-                }
-
-                &.active-item{
-                    background-color: @backgroundColorSelectionButton;
-                    color: @white;
+                    transition:  all  @transitions ease-in-out;
                     
                     &:focus{
                         outline: none;
                         box-shadow: 0 0 0.2rem @lightGray;
                         background-color: @lightTrasparentGreen;
                     }
-                }
-            }
-        
-        }
 
+                    &:hover{
+                        cursor: pointer;
+                        background-color: @lightTrasparentGreen;
+                    }
+
+                    &.active-item{
+                        background-color: @backgroundColorSelectionButton;
+                        color: @white;
+                        
+                        &:focus{
+                            outline: none;
+                            box-shadow: 0 0 0.2rem @lightGray;
+                            background-color: @lightTrasparentGreen;
+                        }
+                    }
+                }
+            
+            }
+
+        }
     }
 }
-
 
