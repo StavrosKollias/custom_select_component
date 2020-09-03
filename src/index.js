@@ -1,9 +1,6 @@
 import _ from 'lodash';
 import "../css/style.less";
 
-const optionsObject = { "option 1": "Hello", "option 2": "Stavros", "option 3": "Testing Component" }
-
-
 function generateSelectComponents() {
     const uiSelectComponent = document.querySelectorAll("[data-role*='ui-select-custom']");
     uiSelectComponent.forEach((e, i) => {
