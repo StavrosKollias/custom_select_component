@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import "../css/style.less";
-import pcImg from '../images/pc-mixer.jpg';
 
 const optionsObject = { "option 1": "Hello", "option 2": "Stavros", "option 3": "Testing Component" }
 
